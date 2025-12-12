@@ -3,6 +3,8 @@ import { motion } from 'framer-motion';
 import { Check, Zap, Play, Star, ShieldCheck, Lock, Users, ChevronDown } from 'lucide-react';
 import { BackgroundCells } from './components/ui/background-ripple-effect';
 import { HeroSection } from './components/blocks/hero-section';
+import { ModulesCarousel } from './components/blocks/modules-carousel';
+import { HoverFooter } from './components/blocks/footer';
 
 // --- Hooks & Animation Components ---
 
@@ -191,8 +193,13 @@ function App() {
         </div>
       </section>
 
+      {/* Modules Carousel 3D Section */}
+      <div id="modules">
+        <ModulesCarousel />
+      </div>
+
       {/* Testimonials Marquee Section */}
-      <section className="py-20 bg-slate-950 border-t border-slate-900 overflow-hidden relative">
+      <section id="testimonials" className="py-20 bg-slate-950 border-t border-slate-900 overflow-hidden relative">
         <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-transparent to-slate-950 z-10 pointer-events-none"></div>
         <div className="container mx-auto px-4 mb-16 text-center relative z-20">
             <FadeSection>
@@ -295,9 +302,8 @@ function App() {
         </div>
       </section>
 
-      <footer className="py-8 text-center text-slate-600 text-sm border-t border-slate-900 bg-slate-950 relative z-20">
-        <p>&copy; 2024 Mago do YouTube. Todos os direitos reservados.</p>
-      </footer>
+      {/* New Hover Footer */}
+      <HoverFooter />
     </div>
   );
 }

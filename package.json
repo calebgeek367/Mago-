@@ -10,8 +10,8 @@
   },
   "dependencies": {
     "lucide-react": "^0.560.0",
-    "react": "^19.2.1",
-    "react-dom": "^19.2.1",
+    "react": "19.0.0-rc-69d4b800-20241021",
+    "react-dom": "19.0.0-rc-69d4b800-20241021",
     "@google/genai": "^1.33.0",
     "framer-motion": "11.0.8",
     "clsx": "2.1.0",
