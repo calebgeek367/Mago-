@@ -67,6 +67,7 @@
             animation: {
               'pulse-slow': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
               'gradient-slow': 'gradient 15s ease infinite',
+              'shimmer': 'shimmer 2.5s infinite',
             },
             keyframes: {
               gradient: {
@@ -78,6 +79,10 @@
                   'background-size': '200% 200%',
                   'background-position': 'right center'
                 }
+              },
+              shimmer: {
+                '0%': { transform: 'translateX(-150%) skewX(-15deg)' },
+                '50%, 100%': { transform: 'translateX(150%) skewX(-15deg)' }
               }
             }
           }
@@ -85,9 +90,13 @@
       }
     </script>
     <style>
+      html {
+        scroll-behavior: smooth;
+      }
       body {
         background-color: #020617;
         color: #f8fafc;
+        overflow-x: hidden;
       }
       .text-glow {
         text-shadow: 0 0 20px rgba(56, 189, 248, 0.3);
@@ -107,7 +116,8 @@
     "clsx": "https://esm.sh/clsx@^2.1.1",
     "@radix-ui/react-slot": "https://esm.sh/@radix-ui/react-slot@^1.2.4",
     "class-variance-authority": "https://esm.sh/class-variance-authority@^0.7.1",
-    "tailwind-merge": "https://esm.sh/tailwind-merge@^3.4.0"
+    "tailwind-merge": "https://esm.sh/tailwind-merge@^3.4.0",
+    "lenis": "https://esm.sh/lenis@1.1.18"
   }
 }
 </script>

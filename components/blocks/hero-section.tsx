@@ -3,22 +3,35 @@ import { ArrowRight, ChevronRight, Menu, X, Wand2, Play } from 'lucide-react'
 import { Button } from '../ui/button'
 import { AnimatedGroup } from '../ui/animated-group'
 import { cn } from '../../lib/utils'
+import { MagicButton, MinimalWaveButton } from '../ui/magic-button'
+import { TextEffect } from '../ui/text-effect'
 
-const transitionVariants = {
+// Configuração de animação "Suave" (Cinematic Smooth Rise)
+const smoothVariants = {
+    container: {
+        hidden: { opacity: 0 },
+        visible: {
+            opacity: 1,
+            transition: {
+                staggerChildren: 0.15,
+                delayChildren: 0.2,
+            },
+        },
+    },
     item: {
-        hidden: {
-            opacity: 0,
-            filter: 'blur(12px)',
-            y: 12,
+        hidden: { 
+            opacity: 0, 
+            y: 40, 
+            filter: 'blur(10px)' 
         },
         visible: {
             opacity: 1,
-            filter: 'blur(0px)',
             y: 0,
+            filter: 'blur(0px)',
             transition: {
-                type: 'spring',
-                bounce: 0.3,
-                duration: 1.5,
+                // Curva de Bezier para um movimento suave e elegante (sem bounce/pulo)
+                ease: [0.2, 0.8, 0.2, 1],
+                duration: 1.2,
             },
         },
     },
@@ -53,42 +66,17 @@ export function HeroSection() {
                 </div>
                 <section>
                     <div className="relative pt-24 md:pt-36 pb-20">
-                        <AnimatedGroup
-                            variants={{
-                                container: {
-                                    visible: {
-                                        transition: {
-                                            delayChildren: 1,
-                                        },
-                                    },
-                                },
-                                item: {
-                                    hidden: {
-                                        opacity: 0,
-                                        y: 20,
-                                    },
-                                    visible: {
-                                        opacity: 1,
-                                        y: 0,
-                                        transition: {
-                                            type: 'spring',
-                                            bounce: 0.3,
-                                            duration: 2,
-                                        },
-                                    },
-                                },
-                            }}
-                            className="absolute inset-0 -z-20">
-                           {/* Background Glow */}
-                           <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10"></div>
-                        </AnimatedGroup>
+                        {/* Background Ambient Glow */}
+                        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10 animate-pulse-slow"></div>
                         <div aria-hidden className="absolute inset-0 -z-10 size-full [background:radial-gradient(125%_125%_at_50%_100%,transparent_0%,#020617_75%)]" />
+                        
                         <div className="mx-auto max-w-7xl px-6">
-                            <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0">
-                                <AnimatedGroup variants={transitionVariants}>
+                            <div className="text-center sm:mx-auto lg:mr-auto lg:mt-0 flex flex-col items-center">
+                                {/* Top Badge */}
+                                <AnimatedGroup variants={smoothVariants}>
                                     <a
                                         href="#offer"
-                                        className="hover:bg-background dark:hover:border-t-border bg-slate-900/50 backdrop-blur-sm group mx-auto flex w-fit items-center gap-4 rounded-full border border-white/5 p-1 pl-4 shadow-md shadow-black/5 transition-all duration-300 dark:shadow-zinc-950 hover:scale-105">
+                                        className="hover:bg-background dark:hover:border-t-border bg-slate-900/50 backdrop-blur-sm group mx-auto flex w-fit items-center gap-4 rounded-full border border-white/5 p-1 pl-4 shadow-md shadow-black/5 transition-all duration-300 dark:shadow-zinc-950 hover:scale-105 mb-8">
                                         <span className="text-foreground text-sm font-bold text-primary">PROMOÇÃO DE NATAL: 50% OFF ⚡</span>
                                         <span className="dark:border-background block h-4 w-0.5 border-l bg-white dark:bg-zinc-700"></span>
 
@@ -103,79 +91,66 @@ export function HeroSection() {
                                             </div>
                                         </div>
                                     </a>
+                                </AnimatedGroup>
                         
-                                    <h1
-                                        className="mt-8 max-w-5xl mx-auto text-balance text-4xl md:text-6xl lg:mt-16 xl:text-7xl font-black tracking-tight">
-                                        Aprenda a minha Estratégia para viver do YouTube <span className="text-primary text-glow">SEM APARECER</span>
-                                    </h1>
-                                    <p
-                                        className="mx-auto mt-8 max-w-2xl text-balance text-lg text-muted-foreground">
+                                {/* Main Heading with Word-by-Word Animation */}
+                                <h1 className="max-w-5xl mx-auto text-balance text-4xl md:text-6xl xl:text-7xl font-black tracking-tight mb-8">
+                                    <TextEffect 
+                                        per="word" 
+                                        preset="slide" 
+                                        delay={0.5} 
+                                        className="inline-block text-white"
+                                    >
+                                        {"Aprenda a minha Estratégia para viver do YouTube"}
+                                    </TextEffect>
+                                    {' '}
+                                    <TextEffect 
+                                        per="word" 
+                                        preset="slide" 
+                                        delay={1.5} 
+                                        className="text-primary text-glow inline-block"
+                                    >
+                                        {"SEM APARECER"}
+                                    </TextEffect>
+                                </h1>
+
+                                {/* Subtitle with Smooth Rise */}
+                                <AnimatedGroup variants={smoothVariants} className="w-full">
+                                    <p className="mx-auto max-w-2xl text-balance text-lg text-muted-foreground mb-12">
                                         Do <span className="text-white font-bold">ZERO</span> até a <span className="text-white font-bold">MONETIZAÇÃO</span>. Descubra como eu fiz na prática pra construir negócios digitais que me rendem dinheiro todo mês.
                                     </p>
-                                </AnimatedGroup>
-
-                                <AnimatedGroup
-                                    variants={{
-                                        container: {
-                                            visible: {
-                                                transition: {
-                                                    staggerChildren: 0.05,
-                                                    delayChildren: 0.75,
-                                                },
-                                            },
-                                        },
-                                        ...transitionVariants,
-                                    }}
-                                    className="mt-12 flex flex-col items-center justify-center gap-4 md:flex-row">
-                                    <div
-                                        key={1}
-                                        className="bg-foreground/10 rounded-[14px] border p-0.5">
+                                
+                                    {/* Buttons */}
+                                    <div className="flex flex-col items-center justify-center gap-4 md:flex-row mb-16">
+                                        <div className="bg-transparent p-1">
+                                            <MagicButton href="#offer" className="shadow-none">
+                                                Garantir Minha Vaga
+                                            </MagicButton>
+                                        </div>
                                         <Button
                                             asChild
                                             size="lg"
-                                            className="rounded-xl px-8 text-base font-bold h-14 shadow-[0_0_20px_rgba(34,211,238,0.3)]
-                                            relative overflow-hidden bg-primary text-brand-dark transition-all duration-300
-                                            before:absolute before:inset-0 before:bg-white before:translate-x-[-100%] before:transition-transform before:duration-300 before:ease-out
-                                            hover:before:translate-x-0 hover:text-black hover:shadow-[0_0_30px_rgba(255,255,255,0.4)]
-                                            z-10 before:-z-10">
-                                            <a href="#offer">
-                                                <span className="text-nowrap flex items-center gap-2 relative z-20">Garantir Minha Vaga <ArrowRight className="w-4 h-4"/></span>
+                                            variant="ghost"
+                                            className="h-14 rounded-xl px-8 text-base">
+                                            <a href="#video">
+                                                <span className="text-nowrap flex items-center gap-2">Assistir Vídeo <Play className="w-4 h-4 fill-current"/></span>
                                             </a>
                                         </Button>
                                     </div>
-                                    <Button
-                                        key={2}
-                                        asChild
-                                        size="lg"
-                                        variant="ghost"
-                                        className="h-14 rounded-xl px-8 text-base">
-                                        <a href="#video">
-                                            <span className="text-nowrap flex items-center gap-2">Assistir Vídeo <Play className="w-4 h-4 fill-current"/></span>
-                                        </a>
-                                    </Button>
                                 </AnimatedGroup>
                             </div>
                         </div>
 
+                        {/* Video Section with Smooth Reveal */}
                         <AnimatedGroup
-                            variants={{
-                                container: {
-                                    visible: {
-                                        transition: {
-                                            staggerChildren: 0.05,
-                                            delayChildren: 0.75,
-                                        },
-                                    },
-                                },
-                                ...transitionVariants,
-                            }}>
-                            <div id="video" className="relative -mr-56 mt-8 overflow-hidden px-2 sm:mr-0 sm:mt-12 md:mt-20">
+                            variants={smoothVariants}>
+                            <div id="video" className="relative -mr-56 overflow-hidden px-2 sm:mr-0">
                                 <div
                                     aria-hidden
                                     className="bg-gradient-to-b to-background absolute inset-0 z-10 from-transparent from-35% pointer-events-none"
                                 />
-                                <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-5xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1">
-                                    <div className="aspect-video w-full rounded-xl overflow-hidden shadow-[0_0_40px_rgba(34,211,238,0.1)] bg-slate-900 relative z-20">
+                                <div className="inset-shadow-2xs ring-background dark:inset-shadow-white/20 bg-background relative mx-auto max-w-5xl overflow-hidden rounded-2xl border p-4 shadow-lg shadow-zinc-950/15 ring-1 transform hover:scale-[1.01] transition-transform duration-700">
+                                    <div className="aspect-video w-full rounded-xl overflow-hidden shadow-[0_0_40px_rgba(34,211,238,0.1)] bg-slate-900 relative z-20 group">
                                       <iframe
                                         src="https://player.cloudinary.com/embed/?cloud_name=duihicyei&public_id=AULA_GRATUITA_-_Mago_do_Algoritmo_1080p_h264_youtube_oyuajs&profile=cld-default&autoplay=true"
                                         width="100%"
@@ -270,16 +245,11 @@ const HeroHeader = () => {
                                 </ul>
                             </div>
                             <div className="flex w-full flex-col space-y-3 sm:flex-row sm:gap-3 sm:space-y-0 md:w-fit">
-                                <Button
-                                    asChild
-                                    size="sm"
-                                    className={cn(isScrolled ? 'lg:inline-flex' : 'hidden', 
-                                    'font-bold relative overflow-hidden bg-primary text-brand-dark transition-all duration-300 before:absolute before:inset-0 before:bg-white before:translate-x-[-100%] before:transition-transform before:duration-300 before:ease-out hover:before:translate-x-0 hover:text-black z-10 before:-z-10'
-                                    )}>
-                                    <a href="#offer">
-                                        <span className="relative z-20">Comprar Agora</span>
-                                    </a>
-                                </Button>
+                                <div className={cn(isScrolled ? 'lg:inline-flex' : 'hidden')}>
+                                    <MinimalWaveButton href="#offer" className="px-6 py-2">
+                                        Comprar Agora
+                                    </MinimalWaveButton>
+                                </div>
                             </div>
                         </div>
                     </div>

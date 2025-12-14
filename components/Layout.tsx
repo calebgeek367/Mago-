@@ -32,7 +32,7 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTool, onToolSelect }) =
 
       {/* Sidebar */}
       <aside 
-        className={`fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 border-r border-slate-800 transform transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:inset-auto ${
+        className={`fixed inset-y-0 left-0 z-50 w-64 bg-slate-900 border-r border-slate-800 transform transition-transform duration-300 ease-in-out md:translate-x-0 md:static md:inset-auto h-screen overflow-y-auto ${
           isSidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -69,7 +69,7 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTool, onToolSelect }) =
           })}
         </nav>
 
-        <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-slate-800">
+        <div className="absolute bottom-0 left-0 right-0 p-6 border-t border-slate-800 bg-slate-900">
           <div className="bg-slate-800/50 rounded-lg p-4 backdrop-blur-sm border border-slate-700/50">
             <p className="text-xs text-slate-400 mb-2">Créditos de IA</p>
             <div className="w-full bg-slate-700 rounded-full h-2 mb-2">
@@ -81,7 +81,7 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTool, onToolSelect }) =
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 flex flex-col min-w-0 overflow-hidden h-screen">
+      <main className="flex-1 flex flex-col min-w-0 min-h-screen">
         {/* Header */}
         <header className="h-16 border-b border-slate-800 bg-slate-950/50 backdrop-blur-md flex items-center justify-between px-6 sticky top-0 z-30">
           <button 
@@ -105,11 +105,11 @@ const Layout: React.FC<LayoutProps> = ({ children, activeTool, onToolSelect }) =
         </header>
 
         {/* Content Scroll Area */}
-        <div className="flex-1 overflow-auto p-4 md:p-8 relative">
+        <div className="flex-1 p-4 md:p-8 relative">
            {/* Background Decoration */}
            <div className="absolute top-0 left-0 w-full h-96 bg-magic-900/10 rounded-full blur-3xl -z-10 transform -translate-y-1/2 pointer-events-none"></div>
            
-           <div className="max-w-6xl mx-auto animate-fade-in">
+           <div className="max-w-6xl mx-auto animate-fade-in pb-12">
             {children}
            </div>
         </div>

@@ -5,6 +5,7 @@ import { BackgroundCells } from './components/ui/background-ripple-effect';
 import { HeroSection } from './components/blocks/hero-section';
 import { ModulesCarousel } from './components/blocks/modules-carousel';
 import { HoverFooter } from './components/blocks/footer';
+import { MagicButton } from './components/ui/magic-button';
 
 // --- Hooks & Animation Components ---
 
@@ -116,7 +117,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen font-sans bg-brand-dark overflow-x-hidden">
+    <div className="min-h-screen font-sans bg-brand-dark w-full overflow-x-hidden">
       
       {/* New Hero Section */}
       <HeroSection />
@@ -242,14 +243,11 @@ function App() {
             </FadeSection>
 
             <FadeSection delay={1000}>
-              <button 
-                className="w-full bg-brand-button text-brand-dark font-black text-xl py-6 rounded-2xl shadow-[0_0_30px_rgba(34,211,238,0.4)] hover:shadow-[0_0_50px_rgba(34,211,238,0.6)] hover:scale-105 transition-all duration-300 uppercase tracking-wide cursor-pointer z-50 relative overflow-hidden before:absolute before:inset-0 before:bg-white before:translate-x-[-100%] before:transition-transform before:duration-300 before:ease-out hover:before:translate-x-0 group"
-              >
-                <span className="relative z-10 flex items-center justify-center gap-2 group-hover:text-black transition-colors duration-300">
+              <div className="flex justify-center w-full">
+                <MagicButton icon={Zap} className="w-full md:w-auto min-w-[300px]">
                   Comprar Agora
-                  <Zap className="w-6 h-6 fill-current" />
-                </span>
-              </button>
+                </MagicButton>
+              </div>
               
               <div className="mt-6 flex justify-center gap-4 text-slate-500 text-xs">
                 <span className="flex items-center gap-1"><ShieldCheck className="w-3 h-3"/> Compra 100% Segura</span>
@@ -293,7 +291,7 @@ function App() {
               answer="O acesso é VITALÍCIO. Você paga uma única vez e tem acesso para sempre ao conteúdo e a todas as futuras atualizações do curso."
               delay={500}
             />
-             <FAQItem 
+            <FAQItem 
               question="E se eu não gostar?"
               answer="Você tem 7 dias de garantia incondicional. Se por qualquer motivo achar que o curso não é para você, devolvemos 100% do seu dinheiro, sem perguntas."
               delay={600}
